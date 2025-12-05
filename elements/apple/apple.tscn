@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://brfdsdeqcb4qe"]
+[gd_scene load_steps=6 format=3 uid="uid://brfdsdeqcb4qe"]
 
 [ext_resource type="Texture2D" uid="uid://yr3d2gdfsoy4" path="res://assets/apple1.png" id="1_4ieif"]
-[ext_resource type="Script" uid="uid://oslhipq7ovoe" path="res://elements/apple/area_2d.gd" id="2_y5ru1"]
+[ext_resource type="Script" uid="uid://rqamv03i7a6r" path="res://elements/apple/apple.gd" id="1_636kk"]
+[ext_resource type="Texture2D" uid="uid://c58bpd5jbr21l" path="res://assets/apple2.png" id="3_5e3yg"]
+[ext_resource type="Texture2D" uid="uid://cvqn2oc2i16g5" path="res://assets/apple3.png" id="4_2auua"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5e3yg"]
 radius = 36.0
 
 [node name="Apple" type="Node2D"]
+script = ExtResource("1_636kk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 13)
@@ -18,10 +21,38 @@ position = Vector2(0, 13)
 rotation = -3.1415925
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("2_y5ru1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_5e3yg")
 
+[node name="AppleParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("3_5e3yg")
+one_shot = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 500)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+angular_velocity_min = -720.0
+angular_velocity_max = 400.0
+angle_min = 180.0
+angle_max = 180.0
+
+[node name="AppleParticles2D2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("4_2auua")
+one_shot = true
+direction = Vector2(0, 1)
+gravity = Vector2(0, 500)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+angular_velocity_min = -720.0
+angular_velocity_max = 400.0
+angle_min = 180.0
+angle_max = 180.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
